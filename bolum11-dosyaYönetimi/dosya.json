@@ -1,0 +1,12 @@
+[
+    {
+        "kursAdi" : "PHP Kursu",
+        "aciklama": "iyi bir kurs"
+    },
+    {
+        "kursAdi" : "Python Kursu",
+        "aciklama": "iyi bir kurs"
+    }
+
+
+]
