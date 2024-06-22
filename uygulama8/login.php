@@ -3,7 +3,7 @@ include 'libs/ayar.php';
 require 'libs/variables.php';
 require 'libs/functions.php';
 
-    session_start();
+  
 
     if(isLoggedin()){
         header('Location:index.php');
@@ -33,7 +33,7 @@ require 'libs/functions.php';
         }
 
         if(empty($usernameErr) && empty($passwordErr)){
-            $sql = "SELECT id,Username,password FROM users WHERE username=?";
+            $sql = "SELECT id,Username,password,user_type FROM users WHERE username=?";
            if( $stmt = mysqli_prepare($baglanti, $sql)){
                 mysqli_stmt_bind_param($stmt,"s",$userName);
                     if(mysqli_stmt_execute($stmt)){
@@ -41,13 +41,14 @@ require 'libs/functions.php';
 
                             if(mysqli_stmt_num_rows($stmt)==1){
                                 // parola kontrolü
-                                mysqli_stmt_bind_result($stmt,$id,$Username,$hash_password);
+                                mysqli_stmt_bind_result($stmt,$id,$Username,$hash_password,$user_type);
                                 if(mysqli_stmt_fetch($stmt)){
                                     if(password_verify($Password,$hash_password)){
                                         // uygulamaya giriş yapıldı
                                         $_SESSION["loggedIn"]=true;
                                         $_SESSION["id"]=$id;
                                         $_SESSION["username"]=$Username;
+                                        $_SESSION["user_type"]=$user_type;
                                         header('Location: index.php');
                                     }else{
                                         $passwordErr="parola yanlış";

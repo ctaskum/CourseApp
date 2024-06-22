@@ -1,9 +1,13 @@
 <?php
-
+   session_start();
 function isLoggedin(){
-    return (isset($SESSION["loggedIn"]) && $SESSION["loggedIn"]==true );
+    return (isset($_SESSION["loggedIn"]) && $_SESSION["loggedIn"]==true );
 }
+function isAdmin(){
 
+return (isLoggedin() && $_SESSION["user_type"]=="admin");
+
+}
 function getCategories(){
     include 'ayar.php';
     $query = "SELECT * FROM kategoriler";

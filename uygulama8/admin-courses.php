@@ -1,6 +1,11 @@
 <?php 
+ 
     require 'libs/functions.php';
     require 'libs/variables.php';
+
+    if(!isAdmin()){
+        header('Location:unauthorize.php');
+    }
 ?>
 
 

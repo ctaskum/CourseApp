@@ -2,7 +2,7 @@
 require 'libs/functions.php'; ?>
 
 <?php
-session_start();
+
 $courseName = $courseNameErr =$Altbaslik=$AltbaslikErr=$resim=$resimErr="";
 $categoryErr="";
 $categoryId = "0";

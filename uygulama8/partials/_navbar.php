@@ -6,7 +6,7 @@
         <li class="nav-item">
             <a href="index.php" class="nav-link navbar-brand">Anasayfa</a>
         </li>
-        <?php if(isset($_SESSION["loggedIn"])):?>
+        <?php if(isAdmin()):?>
         <li class="nav-item">
             <a href="admin-categories.php" class="nav-link ">Admin Categories</a>
         </li>

@@ -2,7 +2,7 @@
 require 'libs/functions.php'; ?>
 
 <?php
-session_start();
+
 $CatName = $categoryErr ="";
  if($_SERVER["REQUEST_METHOD"]== "POST")
  {
