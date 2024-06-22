@@ -29,7 +29,25 @@
             $usernameErr= "username sadece rakam,harf ve altçizgi içermelidir.";
         }
         else {
-            $userName=safe_html($_POST["username"]);
+
+            $sql = "SELECT id FROM users WHERE Username=?";
+
+            if($stmt = mysqli_prepare($baglanti,$sql)){
+                $param_username=trim(safe_html($_POST["username"]));
+                mysqli_stmt_bind_param($stmt,"s",$param_username);
+
+                if(mysqli_stmt_execute($stmt)){
+                    mysqli_stmt_store_result($stmt); // sonucu saklayalım
+
+                    if(mysqli_stmt_num_rows($stmt)==1){
+                         $usernameErr= "kullanıcı adı alınmış";
+                    }else{
+                        $userName=safe_html($_POST["username"]);
+                    }
+                }else{
+                    echo "hata";
+                }
+            }
         }
         
         if(empty($_POST["email"])){
@@ -38,7 +56,25 @@
             $emailErr= "hatalı email <br>";
         }
         else {
-            $email=safe_html($_POST["email"]);
+            $sql = "SELECT id FROM users WHERE mail=?";
+
+            if($stmt = mysqli_prepare($baglanti,$sql)){
+                $param_mail=trim(safe_html($_POST["email"]));
+                mysqli_stmt_bind_param($stmt,"s",$param_mail);
+
+                if(mysqli_stmt_execute($stmt)){
+                    mysqli_stmt_store_result($stmt); // sonucu saklayalım
+
+                    if(mysqli_stmt_num_rows($stmt)==1){
+                         $emailErr= "bu e posta ile daha önce hesap oluşturulmuştur!";
+                    }else{
+                        $email=safe_html($_POST["email"]);
+                    }
+                }else{
+                    echo "hata";
+                }
+            }
+           
         }
       
         if(empty($_POST["password"])){
