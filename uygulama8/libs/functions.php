@@ -1,5 +1,9 @@
 <?php
 
+function isLoggedin(){
+    return (isset($SESSION["loggedIn"]) && $SESSION["loggedIn"]==true );
+}
+
 function getCategories(){
     include 'ayar.php';
     $query = "SELECT * FROM kategoriler";

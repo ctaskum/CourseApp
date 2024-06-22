@@ -5,7 +5,7 @@ require 'libs/functions.php';
 
     session_start();
 
-    if(isset($_SESSION["loggedIn"]) && $_SESSION["loggedIn"]==true){
+    if(isLoggedin()){
         header('Location:index.php');
     }
 
@@ -62,8 +62,11 @@ require 'libs/functions.php';
                         $loginErr="bağlantı hatası";
                     }
            }
+           mysqli_stmt_close($stmt);
+           mysqli_close($baglanti);
 
         }
+
 
 
     }
