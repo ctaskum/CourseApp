@@ -15,7 +15,7 @@
 
      $userName = "";
      $email= "";
-     $password="";
+     $Password="";
      $repassword = "";
      
 
@@ -25,8 +25,8 @@
           $usernameErr ="username gerekli alandır <br>";
         }elseif(strlen($_POST["username"])<5 or strlen($_POST["username"])>20){
             $usernameErr= "username 5-20 karakter aralığında olmalıdır.";
-        }elseif(!preg_match('/^[A-Za-z][A-Za-z0-9]{5,31}$/', $_POST["username"])){
-            $usernameErr= "username sadece rakam,harf ve altçizgi içermelidir.";
+        // }elseif( !preg_match('/^[A-Za-z][A-Za-z0-9]{5,31}$/', $_POST["username"])){
+        //     $usernameErr= "username sadece rakam,harf ve altçizgi içermelidir.";
         }
         else {
 
@@ -80,7 +80,7 @@
         if(empty($_POST["password"])){
            $passwordErr="password gerekli alandır <br>";
         }else {
-            $password=safe_html($_POST["password"]);
+            $Password=safe_html($_POST["password"]);
         }
         
         if($_POST["repassword"]!=$_POST["password"]){
@@ -98,7 +98,7 @@
             if($stmt = mysqli_prepare($baglanti, $sql)){
                 $param_username = $userName;
                 $param_email = $email;
-                $param_password = password_hash($password, PASSWORD_DEFAULT);
+                $param_password =password_hash($Password,PASSWORD_DEFAULT);
                 mysqli_stmt_bind_param($stmt,"sss", $param_username, $param_email, $param_password);
 
                 if(mysqli_stmt_execute($stmt)){
@@ -141,7 +141,7 @@
                 </div>
                 <div class="mb-3">
                     <label for="password">Parola : </label>
-                    <input class = "form-control" type="password" name="password" placeholder="şifre" value="<?php echo $password;?>">
+                    <input class = "form-control" type="password" name="password" placeholder="şifre" value="<?php echo $Password;?>">
                     <div class="text-danger"><?php echo $passwordErr ?></div> 
                 </div>
                 <div class="mb-3">
